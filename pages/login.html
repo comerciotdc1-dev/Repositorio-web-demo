@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login — Accede al ecosistema de alto rendimiento para traders. ABC Traders Elite.">
+  <title>Login VIP — ABC Traders Elite</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <style>
+    /* Specific styles for login */
+    body {
+      background: radial-gradient(ellipse at top, rgba(123, 44, 191, 0.1) 0%, var(--bg-primary) 60%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2xl) var(--space-lg);
+      margin-top: var(--nav-height);
+    }
+    .login-card {
+      background: rgba(17, 17, 17, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(123, 44, 191, 0.3);
+      border-radius: var(--radius-xl);
+      padding: var(--space-3xl);
+      width: 100%;
+      max-width: 480px;
+      box-shadow: var(--shadow-violet);
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+    .login-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: var(--space-sm);
+    }
+    .form-group {
+      margin-bottom: var(--space-lg);
+    }
+    .form-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xs);
+    }
+    .form-input {
+      width: 100%;
+      padding: 14px 20px;
+      background: rgba(10, 10, 10, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: var(--font-sans);
+      transition: all var(--transition-fast);
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-violet);
+      background: rgba(10, 10, 10, 0.8);
+      box-shadow: 0 0 0 2px rgba(123, 44, 191, 0.2);
+    }
+    .form-actions {
+      margin-top: var(--space-2xl);
+    }
+    .login-footer {
+      text-align: center;
+      margin-top: var(--space-xl);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+    }
+    .login-footer a {
+      color: var(--accent-violet-light);
+      font-weight: 600;
+    }
+    .auth-error {
+      color: var(--danger);
+      background: rgba(255, 23, 68, 0.1);
+      border: 1px solid rgba(255, 23, 68, 0.3);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      margin-bottom: var(--space-lg);
+      display: none;
+    }
+    .auth-tabs {
+      display: flex;
+      margin-bottom: var(--space-2xl);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .auth-tab {
+      flex: 1;
+      text-align: center;
+      padding: var(--space-sm) 0;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      position: relative;
+    }
+    .auth-tab.active {
+      color: var(--text-primary);
+    }
+    .auth-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-violet);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="nav-logo">
+        <div class="logo-icon">A</div>
+        ABC<span class="gold">.</span>Elite
+      </a>
+      <div class="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="trading-hub.html">Trading Hub</a>
+        <a href="academy.html">Academy</a>
+        <a href="signals.html">Signals</a>
+        <a href="tools.html">Tools</a>
+        <a href="content.html">Content</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+      <div class="nav-cta">
+        <a href="pricing.html" class="btn btn-primary btn-sm">Acceder al sistema</a>
+      </div>
+      <div class="nav-hamburger" id="navHamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="../index.html">Home</a>
+    <a href="trading-hub.html">Trading Hub</a>
+    <a href="academy.html">Academy</a>
+    <a href="signals.html">Signals</a>
+    <a href="tools.html">Tools</a>
+    <a href="content.html">Content</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="pricing.html" class="btn btn-primary" style="margin-top:1rem;">Acceder</a>
+  </div>
+
+  <div class="login-container">
+    <div class="login-card fade-in">
+      <div class="login-header">
+        <div class="label" style="display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:0.8rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent-gold);margin-bottom:1rem;padding:4px 16px;border:1px solid rgba(255,215,0,0.2);border-radius:9999px;background:rgba(255,215,0,0.08);">🔒 Acceso VIP</div>
+        <h1>Bienvenido</h1>
+        <p class="text-secondary">Ingresa al ecosistema de alto rendimiento</p>
+      </div>
+
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Iniciar Sesión</div>
+        <div class="auth-tab" id="tabRegister" onclick="switchTab('register')">Crear Cuenta</div>
+      </div>
+
+      <div id="authError" class="auth-error"></div>
+
+      <!-- Formulario Login -->
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Correo Electrónico</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <div class="flex-between mb-xs">
+            <label class="form-label" style="margin: 0;">Contraseña</label>
+            <a href="#" style="font-size: 0.8rem; color: var(--accent-violet-light);" onclick="handleResetPassword(event)">¿Olvidaste tu contraseña?</a>
+          </div>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" style="width: 100%;" id="btnLogin">Ingresar al sistema →</button>
+        </div>
+      </form>
+
+      <!-- Formulario Registro -->
+      <form id="registerForm" onsubmit="handleRegister(event)" style="display: none;">
+        <div class="form-group">
+          <label class="form-label">Nombre Completo</label>
+          <input type="text" id="registerName" class="form-input" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Correo Electrónico</label>
+          <input type="email" id="registerEmail" class="form-input" placeholder="tu@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Contraseña</label>
+          <input type="password" id="registerPassword" class="form-input" placeholder="••••••••" required minlength="6">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" style="width: 100%;" id="btnRegister">Crear cuenta →</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <script src="../assets/js/main.js"></script>
+  <!-- Firebase App (the core Firebase SDK) -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
+
+    // Reemplazar con la configuración real de Firebase cuando se tenga
+    const firebaseConfig = {
+      apiKey: "TEST_API_KEY",
+      authDomain: "abc-traders-elite.firebaseapp.com",
+      projectId: "abc-traders-elite",
+      storageBucket: "abc-traders-elite.appspot.com",
+      messagingSenderId: "123456789",
+      appId: "1:123456789:web:abcdef"
+    };
+
+    let auth;
+    try {
+        const app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+    } catch (e) {
+        console.warn("Firebase not properly configured yet. Mocking auth for UI preview.");
+        // Mock auth for development without real firebase config
+        auth = {
+            currentUser: null
+        };
+    }
+
+
+    window.switchTab = function(tab) {
+      document.getElementById('authError').style.display = 'none';
+      if (tab === 'login') {
+        document.getElementById('tabLogin').classList.add('active');
+        document.getElementById('tabRegister').classList.remove('active');
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('registerForm').style.display = 'none';
+      } else {
+        document.getElementById('tabRegister').classList.add('active');
+        document.getElementById('tabLogin').classList.remove('active');
+        document.getElementById('registerForm').style.display = 'block';
+        document.getElementById('loginForm').style.display = 'none';
+      }
+    };
+
+    window.showError = function(message) {
+      const errorDiv = document.getElementById('authError');
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+    };
+
+    window.handleLogin = async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const btn = document.getElementById('btnLogin');
+      
+      const originalText = btn.textContent;
+      btn.textContent = 'Autenticando...';
+      btn.disabled = true;
+
+      try {
+        if(auth.signInWithEmailAndPassword) {
+           await signInWithEmailAndPassword(auth, email, password);
+        } else {
+            // Mock login for preview
+            localStorage.setItem('abc_traders_vip', 'true');
+            localStorage.setItem('abc_traders_user', JSON.stringify({email: email, name: 'Trader VIP'}));
+        }
+        
+        // Redirigir a trading hub o página anterior
+        const redirect = sessionStorage.getItem('redirectUrl') || 'trading-hub.html';
+        window.location.href = redirect;
+      } catch (error) {
+        showError(error.message || 'Error al iniciar sesión. Verifica tus credenciales.');
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    };
+
+    window.handleRegister = async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('registerName').value;
+      const email = document.getElementById('registerEmail').value;
+      const password = document.getElementById('registerPassword').value;
+      const btn = document.getElementById('btnRegister');
+      
+      const originalText = btn.textContent;
+      btn.textContent = 'Creando cuenta...';
+      btn.disabled = true;
+
+      try {
+        if(auth.createUserWithEmailAndPassword) {
+           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+           await updateProfile(userCredential.user, { displayName: name });
+        } else {
+           // Mock register
+           localStorage.setItem('abc_traders_vip', 'true');
+           localStorage.setItem('abc_traders_user', JSON.stringify({email: email, name: name}));
+        }
+        
+        window.location.href = 'trading-hub.html';
+      } catch (error) {
+        showError(error.message || 'Error al crear la cuenta. Intenta con otro correo.');
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    };
+
+    window.handleResetPassword = async function(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      
+      if (!email) {
+        showError('Por favor ingresa tu correo electrónico primero.');
+        return;
+      }
+
+      try {
+        if(auth.sendPasswordResetEmail) {
+            await sendPasswordResetEmail(auth, email);
+        }
+        showError('Te hemos enviado un correo para restablecer tu contraseña.');
+        document.getElementById('authError').style.color = 'var(--success)';
+        document.getElementById('authError').style.backgroundColor = 'rgba(0, 200, 83, 0.1)';
+        document.getElementById('authError').style.borderColor = 'rgba(0, 200, 83, 0.3)';
+      } catch (error) {
+        showError('Error al enviar el correo de recuperación.');
+      }
+    };
+  </script>
+</body>
+</html>
